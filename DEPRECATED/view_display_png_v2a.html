@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Annotation Control</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="plugin_display_png.js"></script>
+    <link rel="stylesheet" href="display-png.css">
+</head>
+<body>
+    <div class="annotator-png"></div>
+</body>
+<script>
+    var flagAnnotatorPNG = "annotator-png";
+    var flagToolbox = "annotator-png-toolbox";
+    var flagContainer = "annotator-png-container";
+    var flagContainerAnnotation = "annotator-png-container-annotation";
+    var flagUploadImage = "annotator-png-upload-image";
+    var flagAddArrow = "annotator-png-add-arrow";
+    var flagAddTextbox = "annotator-png-add-textbox";
+    var flagAddSymbol = "annotator-png-add-symbol";
+    var flagColourPicker = "annotator-png-colour-picker";
+    var flagEraseMode = "annotator-png-erase-mode";
+    var flagSaveImage = "annotator-png-save-image";
+    var flagCanvasAnnotation = "annotator-png-canvas-annotation";
+    var keyFabric = "fabric";
+    var isEraseMode = false; // "isEraseMode";
+    
+    $(document).ready(function() {
+        $("." + flagAnnotatorPNG).annotatorPNG({
+        });
+    });
+</script>
+</html>

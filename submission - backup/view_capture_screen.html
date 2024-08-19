@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Layout Template</title>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="shared.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/mocha/mocha.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mocha/8.3.2/mocha.min.css">
+    <link rel="stylesheet" href="capture-screen.css">
+</head>
+<body>
+    <header>
+        <h1>Website Title</h1>
+    </header>
+    
+    <div class="content-wrapper">
+        <main>
+            <h2>Main Content</h2>
+            <p>This is where the main content of your page goes. You can add articles, blog posts, or any other primary content here.</p>
+            <input type="text" value="Test 1" />
+            <input type="number" value="2" />
+            <textarea>Test 3</textarea>
+
+            <!-- Start of Screen Capture Plugin HTML -->
+            <button class="capture-screen" role="button">Capture Screen</button>
+            <!-- End of Screen Capture Plugin HTML -->
+             
+            <div id="notification-widget" class="modal">
+                <h3>Notifications</h3>
+                <p>You have 3 new messages.</p>
+            </div>
+            <a href="#notification-widget" id="notification-toggle" class="widget-toggle">Toggle Notifications</a>
+        
+            <div id="chat-widget" class="modal">
+                <h3>Chat</h3>
+                <p>Chat content goes here...</p>
+            </div>
+            <a href="#chat-widget" id="chat-toggle" class="widget-toggle">Toggle Chat</a>
+        
+            <div id="settings-widget" class="modal">
+                <h3>Quick Settings</h3>
+                <p>Adjust your settings here...</p>
+            </div>
+            <a href="#settings-widget" id="settings-toggle" class="widget-toggle">Toggle Settings</a>
+        
+            <div id="mocha"></div>
+        </main>
+    </div>
+
+    <div id="modalTest" class="modal">
+        <div class="modal-content">
+            <h2>Test Modal</h2>
+            <p>This is a test modal.</p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mocha/8.3.2/mocha.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/4.3.4/chai.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/10.0.0/sinon.min.js"></script>
+    <div id="mocha"></div>
+
+    <script class="mocha-init">
+        mocha.setup({
+        ui: 'bdd',
+        globals: [
+            'flagInitialised',
+            'defaultOptions', 'flagCaptureScreen', 
+            'idModalNotifications', 'idButtonToggleModalNotifications',
+            'idModalChat', 'idButtonToggleModalChat',
+            'idModalSettings', 'idButtonToggleModalSettings',
+            'idModalTest'
+        ]
+        });
+        mocha.checkLeaks();
+        const expect = chai.expect;
+    </script>
+
+    <script src="plugin_capture_screen.js"></script>
+    <script src="test_plugin_capture_screen_Mocha.js"></script>
+    
+    <script class="mocha-exec">
+        mocha.run();
+    </script>
+</body>
+
+<!-- Start of Screen Capture Plugin JavaScript -->
+<script>
+    var defaultOptions = {
+        buttonText: "Capture Screen",
+        fileName: "screenshot.png",
+    };
+    var flagCaptureScreen = "capture-screen";
+    var idModalNotifications = "#notification-widget";
+    var idButtonToggleModalNotifications = "#notification-toggle";
+    var idModalChat = "#chat-widget";
+    var idButtonToggleModalChat = "#chat-toggle";
+    var idModalSettings = "#settings-widget";
+    var idButtonToggleModalSettings = "#settings-toggle";
+    var idModalTest = "#modalTest";
+
+    $(document).ready(function() {
+
+        $(".capture-screen").screenshotButton(defaultOptions);
+        hookupTestModals();
+    });
+</script>
+<!-- End of Screen Capture Plugin JavaScript -->
+</html>

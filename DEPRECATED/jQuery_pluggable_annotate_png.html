@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Annotation Control</title>
+    <style>
+        .image-annotator {
+            width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .canvas-container {
+            position: relative;
+            margin-bottom: 10px;
+        }
+        #imageCanvas {
+            border: 1px solid #000;
+        }
+        .toolbar {
+            margin-bottom: 10px;
+        }
+        .toolbar button {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-annotator">
+        <input type="file" id="imageUpload" accept="image/png">
+        <div class="canvas-container">
+            <canvas id="imageCanvas"></canvas>
+        </div>
+        <div class="toolbar">
+            <button id="addArrow">Add Arrow</button>
+            <button id="addTextbox">Add Textbox</button>
+            <button id="eraseElement">Erase Element</button>
+        </div>
+        <button id="saveButton">Save</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+    <script>
+    (function($) {
+        $.fn.imageAnnotator = function(options) {
+            return this.each(function() {
+                const $container = $(this);
+                const $imageUpload = $container.find('#imageUpload');
+                const $canvas = $container.find('#imageCanvas');
+                const $addArrow = $container.find('#addArrow');
+                const $addTextbox = $container.find('#addTextbox');
+                const $eraseElement = $container.find('#eraseElement');
+                const $saveButton = $container.find('#saveButton');
+
+                let canvas = new fabric.Canvas('imageCanvas', {
+                    width: 800,
+                    height: 600
+                });
+
+                $imageUpload.on('change', function(e) {
+                    const file = e.target.files[0];
+                    const reader = new FileReader();
+
+                    reader.onload = function(f) {
+                        fabric.Image.fromURL(f.target.result, function(img) {
+                            canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+                                scaleX: canvas.width / img.width,
+                                scaleY: canvas.height / img.height
+                            });
+                        });
+                    };
+
+                    reader.readAsDataURL(file);
+                });
+
+                $addArrow.on('click', function() {
+                    const arrow = new fabric.Path('M 0 0 L 200 100', {
+                        fill: 'red',
+                        stroke: 'red',
+                        strokeWidth: 2,
+                        left: 100,
+                        top: 100
+                    });
+                    canvas.add(arrow);
+                });
+
+                $addTextbox.on('click', function() {
+                    const textbox = new fabric.Textbox('Enter text', {
+                        left: 100,
+                        top: 100,
+                        width: 150,
+                        fontSize: 20
+                    });
+                    canvas.add(textbox);
+                });
+
+                $eraseElement.on('click', function() {
+                    const activeObject = canvas.getActiveObject();
+                    if (activeObject) {
+                        canvas.remove(activeObject);
+                    }
+                });
+
+                $saveButton.on('click', function() {
+                    if (confirm("Please ensure there is no sensitive information or PII in your annotations. Do you want to proceed?")) {
+                        const dataURL = canvas.toDataURL({
+                            format: 'png',
+                            quality: 1
+                        });
+                        console.log(dataURL); // In a real application, you would send this to your server
+                        alert("Image saved as Base64 string. Check the console for the output.");
+                    }
+                });
+            });
+        };
+    }(jQuery));
+
+    // Initialize the plugin
+    $(document).ready(function() {
+        $('.image-annotator').imageAnnotator();
+    });
+    </script>
+</body>
+</html>

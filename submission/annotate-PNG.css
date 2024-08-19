@@ -1,0 +1,15 @@
+
+.annotator-png-container-annotation {
+    position: relative;
+    border: 1px solid #ccc;
+    margin: 20px auto;
+}
+.annotator-png-canvas-annotation {
+    border: 1px solid #ccc;
+}
+.annotator-png-toolbox {
+    margin-bottom: 10px;
+}
+button {
+    margin-right: 5px;
+}

@@ -1,0 +1,15 @@
+
+
+Tests:
+rename variables, methods
+
+
+Screen Capture:
+Add tooltip on click button, and check that tooltip included in png
+test scrollable elements - do objects end up in png?
+css styles - more required
+
+button enter trigger
+
+Annotate PNG:
+

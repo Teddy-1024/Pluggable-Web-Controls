@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Floating Widgets Examples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .widget {
+            position: fixed;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+        }
+        .widget-toggle {
+            position: fixed;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #notification-widget {
+            top: 20px;
+            right: 20px;
+            width: 250px;
+        }
+        #notification-toggle {
+            top: 20px;
+            right: 20px;
+        }
+        #chat-widget {
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 400px;
+        }
+        #chat-toggle {
+            bottom: 20px;
+            right: 20px;
+        }
+        #settings-widget {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+        }
+        #settings-toggle {
+            top: 20px;
+            left: 20px;
+        }
+        .widget:target {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Floating Widgets Examples</h1>
+    <p>Click the buttons to toggle the widgets.</p>
+
+    <!-- Notification Widget -->
+    <div id="notification-widget" class="widget">
+        <h3>Notifications</h3>
+        <p>You have 3 new messages.</p>
+    </div>
+    <a href="#notification-widget" id="notification-toggle" class="widget-toggle">Toggle Notifications</a>
+
+    <!-- Chat Widget -->
+    <div id="chat-widget" class="widget">
+        <h3>Chat</h3>
+        <p>Chat content goes here...</p>
+    </div>
+    <a href="#chat-widget" id="chat-toggle" class="widget-toggle">Toggle Chat</a>
+
+    <!-- Quick Settings Widget -->
+    <div id="settings-widget" class="widget">
+        <h3>Quick Settings</h3>
+        <p>Adjust your settings here...</p>
+    </div>
+    <a href="#settings-widget" id="settings-toggle" class="widget-toggle">Toggle Settings</a>
+</body>
+</html>
